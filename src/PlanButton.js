@@ -1,30 +1,51 @@
-import React, { Component, useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import React from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
+import "./index.css";
+import { Button } from "antd";
 
-function simulateNetworkRequest() {
-    return new Promise((resolve) => setTimeout(resolve, 2000));
-}
+export default class App extends React.Component {
+    constructor(props){
+        super();
+        
+    }
+    state = {
+        loadings: []
+    };
 
-export default function LoadingButton() {
-    const [isLoading, setLoading] = useState(false);
+    enterLoading = index => {
+        this.setState(({ loadings }) => {
+            const newLoadings = [...loadings];
+            newLoadings[index] = true;
 
-    useEffect(() => {
-        if (isLoading) {
-            simulateNetworkRequest().then(() => {
-                setLoading(false);
+            return {
+                loadings: newLoadings
+            };
+        });
+        setTimeout(() => {
+            this.setState(({ loadings }) => {
+                const newLoadings = [...loadings];
+                newLoadings[index] = false;
+
+                return {
+                    loadings: newLoadings
+                };
             });
-        }
-    }, [isLoading]);
+        }, 6000);
+    };
 
-    const handleClick = () => setLoading(true);
-
-    return (
-        <Button
-            variant="primary"
-            disabled={isLoading}
-            onClick={!isLoading ? handleClick : null}
-        >
-            {isLoading ? 'Loading…' : 'Click to load'}
+    render() {
+        const { loadings } = this.state;
+        return (
+            <>
+                <Button
+                    type="primary"
+                    loading={loadings[0]}
+                    onClick={() => this.enterLoading(0)}
+                >
+                    Show Plan!
         </Button>
-    );
+            </>
+        );
+    }
 }

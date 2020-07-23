@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import LoadingButton from './PlanButton';
-import SortableTable from './DraggableList';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <LoadingButton />
-    <SortableTable />
   </React.StrictMode>,
   document.getElementById('root')
 );
