@@ -3,6 +3,7 @@ import NavBar from "./NavBar"
 import TopBar from "./TopBar"
 import Main from "./Main"
 import { TOKEN_KEY } from '../constants';
+import Detail from "./Detail"
 
 class App extends Component{
     state = {
@@ -31,6 +32,7 @@ class App extends Component{
                     handleLoginSucceed={this.handleLoginSucceed}
                     isLoggedIn={this.state.isLoggedIn}
                 />
+                {/*<Detail/>*/}
             </div>
         );
     }
