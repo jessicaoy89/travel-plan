@@ -29,24 +29,6 @@ const columns = [
     },
 ];
 
-const place1 = new Data('1');
-const data = [
-    {
-        name: place1.name,
-        // address: 'New York No. 1 Lake Park',
-        index: 0,
-    },
-    {
-        name: 'place2',
-        // address: 'London No. 1 Lake Park',
-        index: 1,
-    },
-    {
-        name: 'place3',
-        // address: 'Sidney No. 1 Lake Park',
-        index: 2,
-    },
-];
 
 const SortableItem = sortableElement(props => <tr {...props} />);
 const SortableContainer = sortableContainer(props => <tbody {...props} />);
@@ -57,14 +39,16 @@ let isFirstTime = true;
 export default class SortableTable extends React.Component {
     state = {
         dataSource: this.generatePlace(),
+        currDay: this.props.day
     };
 
     generatePlace() {
-        const places = this.props.place;
+        const places = this.props.plan;
+        const day = this.props.day
         const newData = []
-        for (let i = 0; i < places.length; i++){
+        for (let i = 0; i < places[day].length; i++){
             newData.push({
-                name: places[i],
+                name: places[day][i],
                 index: i,
             })
         }
@@ -92,8 +76,15 @@ export default class SortableTable extends React.Component {
     }
 
     render() {
+        let inputDay = this.props.day;
+        if (inputDay !== this.state.currDay){
+            this.setState({
+                dataSource: this.generatePlace(),
+                currDay: inputDay,
+            });
+        }
 
-        const { dataSource } = this.state;        
+        const { dataSource, currDay } = this.state;        
 
         const DraggableContainer = props => (
             <SortableContainer

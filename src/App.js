@@ -29,17 +29,15 @@ export default class App extends Component {
     totalPlan[day] = arr;
     this.setState({
       plan: totalPlan,
-      currDay: day,
     });
-
   }
 
   render() {
     return (
         <div>
           <Map plan = {this.state.plan}  day = {this.state.currDay} />
+          <List plan = {this.state.plan} day = {this.state.currDay}  update = {this.onUpdateList.bind(this)} />
           <Tag plan = {this.state.plan} day = {this.state.currDay} update = {this.onUpdateDate.bind(this)} />
-          <List plan = {this.state.plan} day = {this.state.currDay} place = {places}  update = {this.onUpdateList.bind(this)} />
         </div>
       
     )

@@ -32,8 +32,6 @@ class Map extends React.Component {
         super(props);
         this.state = {
             response: null,
-            // travelMode: 'DRIVING',
-            // day: this.props.day,
             places: this.generatePlace(this.props.day)
         };
     }
@@ -53,7 +51,6 @@ class Map extends React.Component {
         }
         obj.waypoints = wpt;
         obj.travelMode = 'DRIVING';
-        // this.setState({places: obj});
         return obj;
     }
 
@@ -73,13 +70,6 @@ class Map extends React.Component {
         }
     }
 
-    handlePlan(){
-        
-    }
-        
-    getPlan() {
-
-    }
 
     render() {
         // this.updateDay();
@@ -97,12 +87,6 @@ class Map extends React.Component {
                         <DirectionsService
                             options={
                                 this.generatePlace(this.props.day)
-                                // {
-                                // destination: this.state.places.des,
-                                // origin: this.state.places.origin,
-                                // waypoints: this.state.places.wpt,
-                                // travelMode: this.state.travelMode,
-                                // }
                         }
                             callback={this.directionsCallback}
                         >
