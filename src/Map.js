@@ -32,10 +32,29 @@ class Map extends React.Component {
         super(props);
         this.state = {
             response: null,
-            travelMode: 'DRIVING',
-            day: this.props.day,
-            planDay: this.props.plan, 
+            // travelMode: 'DRIVING',
+            // day: this.props.day,
+            places: this.generatePlace(this.props.day)
         };
+    }
+
+    generatePlace(day) {
+        let obj = {}
+        let plan = this.props.plan;
+        let wpt = [];
+        const [ori, ...rest] = plan[day];
+        obj.origin = ori;
+        obj.destination = rest.pop();
+        for (let place of rest) {
+            wpt.push({
+                location: place,
+                stopover: true,
+            });
+        }
+        obj.waypoints = wpt;
+        obj.travelMode = 'DRIVING';
+        // this.setState({places: obj});
+        return obj;
     }
 
     directionsCallback = response => {
@@ -54,6 +73,10 @@ class Map extends React.Component {
         }
     }
 
+    handlePlan(){
+        
+    }
+        
     getPlan() {
 
     }
@@ -62,7 +85,7 @@ class Map extends React.Component {
         // this.updateDay();
         return (
             <div>
-                {/* <h1>Travel Planner</h1> */}
+                
                 <LoadScript
                     googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
                 >
@@ -72,18 +95,24 @@ class Map extends React.Component {
                         center={center}
                         options={options}>
                         <DirectionsService
-                            options={{
-                                destination: this.state.planDay[this.props.day][0],
-                                origin: this.state.planDay[this.props.day][1],
-                                // waypoints: this.state.waypoints,
-                                travelMode: this.state.travelMode,
-                            }}
+                            options={
+                                this.generatePlace(this.props.day)
+                                // {
+                                // destination: this.state.places.des,
+                                // origin: this.state.places.origin,
+                                // waypoints: this.state.places.wpt,
+                                // travelMode: this.state.travelMode,
+                                // }
+                        }
                             callback={this.directionsCallback}
-                        />
+                        >
+                            {/* {console.log(`hello, ${this.state.places.wpt}`)} */}
+                        </DirectionsService>
                         <DirectionsRenderer
                             options={{directions: this.state.response}}
                         />
                         <Marker>
+
                             <InfoWindow>
                                 <InterestCard />
                             </InfoWindow>
