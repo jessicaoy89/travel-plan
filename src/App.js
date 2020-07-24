@@ -3,6 +3,8 @@ import Map from './Map'
 import Tag from './SlidingTag'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import List from './DraggableList'
+// import { Button } from 'antd';
+import Button from './PlanButton'
 
 
 const places = ['chicago', 'new york', 'boston']
@@ -38,6 +40,7 @@ export default class App extends Component {
           <Map plan = {this.state.plan}  day = {this.state.currDay} />
           <List plan = {this.state.plan} day = {this.state.currDay}  update = {this.onUpdateList.bind(this)} />
           <Tag plan = {this.state.plan} day = {this.state.currDay} update = {this.onUpdateDate.bind(this)} />
+          <Button />
         </div>
       
     )

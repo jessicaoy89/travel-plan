@@ -6,7 +6,7 @@ import { Steps, Button, message } from "antd";
 
 const { Step } = Steps;
 
-const steps = [{}, {}];
+const steps = [];
 
 export default class App extends React.Component {
     constructor(props) {
@@ -15,6 +15,13 @@ export default class App extends React.Component {
             current: 0,
             steps: [{}]
         };
+        if (steps.length < this.props.plan.length){
+            for(let i = 0; i < this.props.plan.length; i++){
+                console.log(i);
+                steps.push({});
+                console.log(steps);
+            }
+        }
     }
 
     next() {

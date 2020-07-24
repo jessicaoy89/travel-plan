@@ -9,7 +9,7 @@ import {
     Marker,
 } from "@react-google-maps/api";
 import InterestCard from './InterestCard';
-import Button from './PlanButton';
+
 
 const mapContainerStyle = {
     width: "100vw",
@@ -102,7 +102,6 @@ class Map extends React.Component {
                             </InfoWindow>
                         </Marker>
                     </GoogleMap>
-                    <Button />
                         {/* <div>{console.log(this.children)}</div> */}
                 </LoadScript>
             </div>
